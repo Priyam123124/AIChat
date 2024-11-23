@@ -77,9 +77,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.demoapp"
+    namespace "com.AIChat"
     defaultConfig {
-        applicationId "com.demoapp"
+        applicationId "com.AIChat"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -105,6 +105,13 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
+    // Custom APK Naming Logic for AIChat 
+    applicationVariants.all { variant -> 
+     variant.outputs.all { output -> 
+      def newApkName = "AIChat-${variant.buildType.name}-${variant.versionCode}-${variant.versionName}.apk" 
+      outputFileName = newApkName 
+      } 
+    }
 }
 
 dependencies {
@@ -117,3 +124,5 @@ dependencies {
         implementation jscFlavor
     }
 }
+
+apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle")
